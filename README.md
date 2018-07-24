@@ -9,14 +9,14 @@ Maven:
 ```xml
 <dependency>
   <groupId>pw.aru.api</groupId>
-  <artifactId>dd4j</artifactId>
+  <artifactId>DD4J</artifactId>
   <version>VERSION</version>
   <type>pom</type>
 </dependency>
 ```
 Gradle:
 ```gradle
-compile 'pw.aru.api:dd4j:VERSION'
+compile 'pw.aru.api:DD4J:VERSION'
 ```
 
 You can find the latest version [here](https://bintray.com/adriantodt/maven/dd4j)
