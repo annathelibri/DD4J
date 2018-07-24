@@ -102,7 +102,7 @@ bintray {
     pkg {
         repo = 'maven'
         name = project.name
-        licenses = ['MIT']
+        licenses = ['Apache-2.0']
         vcsUrl = 'https://github.com/arubot/DD4J.git'
         publish = true
         version {
