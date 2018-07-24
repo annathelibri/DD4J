@@ -1,5 +1,5 @@
-# dd4j
-[ ![Download](https://api.bintray.com/packages/adriantodt/maven/dd4j/images/download.svg) ](https://bintray.com/adriantodt/maven/dd4j/_latestVersion)
+# DD4J
+[ ![Download](https://api.bintray.com/packages/adriantodt/maven/DD4J/images/download.svg) ](https://bintray.com/adriantodt/maven/DD4J/_latestVersion)
 
 Java API for DuckDuckGo Instant Answers API
 
