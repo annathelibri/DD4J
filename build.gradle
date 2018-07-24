@@ -6,7 +6,7 @@ plugins {
 }
 
 group = 'pw.aru.api'
-version = new Version(major: 1, minor: 0, revision: 0)
+version = new Version(major: 1, minor: 0, revision: 1)
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8

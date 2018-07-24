@@ -9,7 +9,6 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 import okhttp3.ResponseBody;
-import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 import org.slf4j.Logger;
@@ -22,7 +21,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
-import java.util.function.BiConsumer;
 import java.util.zip.GZIPInputStream;
 
 @SuppressWarnings({"unused", "WeakerAccess"})
@@ -60,18 +58,6 @@ public class DD4J extends Reliqua implements AutoCloseable {
     /**
      * Queries Instant Answers API with the string specified on the query argument.
      *
-     * @param query The query to send.
-     * @return The bots found matching the given filter.
-     */
-    @CheckReturnValue
-    @Nonnull
-    public PendingRequest<InstantAnswer> query(@Nonnull String query) {
-        return query(query, false, false);
-    }
-
-    /**
-     * Queries Instant Answers API with the string specified on the query argument.
-     *
      * @param query         The query to send.
      * @param no_html       If the results will contain a .
      * @param skip_disambig Offset for the results.
@@ -98,6 +84,18 @@ public class DD4J extends Reliqua implements AutoCloseable {
             .setStatusCodeValidator(StatusCodeValidator.ACCEPT_200)
             .setRateLimiter(getRateLimiter("/"))
             .build(response -> InstantAnswer.fromJSON(encodedQuery, encodedAppName, toJSONObject(response)), null);
+    }
+
+    /**
+     * Queries Instant Answers API with the string specified on the query argument.
+     *
+     * @param query The query to send.
+     * @return The bots found matching the given filter.
+     */
+    @CheckReturnValue
+    @Nonnull
+    public PendingRequest<InstantAnswer> query(@Nonnull String query) {
+        return query(query, false, false);
     }
 
     @CheckReturnValue
@@ -134,7 +132,6 @@ public class DD4J extends Reliqua implements AutoCloseable {
         private RateLimiterFactory rateLimiterFactory;
         private OkHttpClient httpClient;
         private boolean trackCallSites;
-        private BiConsumer<JSONException, JSONObject> parseErrorHandler;
 
         @CheckReturnValue
         @Nonnull
@@ -190,10 +187,6 @@ public class DD4J extends Reliqua implements AutoCloseable {
                 appName,
                 trackCallSites
             );
-        }
-
-        private static void defaultParseErrorHandler(JSONException e, JSONObject json) {
-            LOGGER.error("Error parsing entity.\nJSON: " + json, e);
         }
     }
 }

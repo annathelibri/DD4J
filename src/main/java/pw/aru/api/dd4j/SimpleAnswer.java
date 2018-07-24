@@ -21,38 +21,42 @@ public final class SimpleAnswer {
     }
 
     protected static SimpleAnswer fromJSON(JSONObject topicJson) {
-        String htmlResult = topicJson.optString("Result");
-        String firstUrl = topicJson.optString("FirstURL");
-        String firstUrlText = topicJson.optString("Text");
-
-        JSONObject iconJson = topicJson.optJSONObject("Icon");
-        if (iconJson == null) {
-            return new SimpleAnswer(htmlResult, firstUrl, firstUrlText, null, 0, 0);
-        }
-        String iconUrl = iconJson.optString("URL");
-        int iconWidth;
-        int iconHeight;
-
         try {
-            iconWidth = Integer.parseInt(iconJson.optString("Width"));
-        } catch (NumberFormatException | JSONException e) {
-            iconWidth = 0;
-        }
+            String htmlResult = topicJson.optString("Result");
+            String firstUrl = topicJson.optString("FirstURL");
+            String firstUrlText = topicJson.optString("Text");
 
-        try {
-            iconHeight = Integer.parseInt(iconJson.optString("Height"));
-        } catch (NumberFormatException | JSONException e) {
-            iconHeight = 0;
-        }
+            JSONObject iconJson = topicJson.optJSONObject("Icon");
+            if (iconJson == null) {
+                return new SimpleAnswer(htmlResult, firstUrl, firstUrlText, null, 0, 0);
+            }
+            String iconUrl = iconJson.optString("URL");
+            int iconWidth;
+            int iconHeight;
 
-        return new SimpleAnswer(
-            htmlResult.equals("") ? null : htmlResult,
-            firstUrl.equals("") ? null : firstUrl,
-            firstUrlText.equals("") ? null : firstUrlText,
-            iconUrl.equals("") ? null : iconUrl,
-            iconWidth,
-            iconHeight
-        );
+            try {
+                iconWidth = Integer.parseInt(iconJson.optString("Width"));
+            } catch (NumberFormatException | JSONException e) {
+                iconWidth = 0;
+            }
+
+            try {
+                iconHeight = Integer.parseInt(iconJson.optString("Height"));
+            } catch (NumberFormatException | JSONException e) {
+                iconHeight = 0;
+            }
+
+            return new SimpleAnswer(
+                htmlResult.equals("") ? null : htmlResult,
+                firstUrl.equals("") ? null : firstUrl,
+                firstUrlText.equals("") ? null : firstUrlText,
+                iconUrl.equals("") ? null : iconUrl,
+                iconWidth,
+                iconHeight
+            );
+        } catch (JSONException e) {
+            throw new IllegalArgumentException("Error parsing JSON of SimpleAnswer", e);
+        }
     }
 
     public String getHtmlResult() {

@@ -19,7 +19,7 @@ Gradle:
 compile 'pw.aru.api:DD4J:VERSION'
 ```
 
-You can find the latest version [here](https://bintray.com/adriantodt/maven/dd4j)
+You can find the latest version [here](https://bintray.com/adriantodt/maven/DD4J)
 
 # Usage
 

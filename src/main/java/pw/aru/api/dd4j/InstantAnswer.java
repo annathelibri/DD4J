@@ -101,9 +101,8 @@ public final class InstantAnswer {
                 Collections.unmodifiableList(relatedTopics),
                 Collections.unmodifiableList(results)
             );
-
         } catch (JSONException e) {
-            throw new IllegalArgumentException("Error parsing json of instant answer", e);
+            throw new IllegalArgumentException("Error parsing JSON of InstantAnswer", e);
         }
     }
 
@@ -173,7 +172,8 @@ public final class InstantAnswer {
 
     @Override
     public String toString() {
-        return "InstantAnswer{" + "link='" + link + '\'' +
+        return "InstantAnswer{" +
+            "link='" + link + '\'' +
             ", type=" + type +
             ", redirectUrl='" + redirectUrl + '\'' +
             ", abstractHtml='" + abstractHtml + '\'' +
