@@ -1,2 +1,39 @@
 # dd4j
+[ ![Download](https://api.bintray.com/packages/adriantodt/maven/dd4j/images/download.svg) ](https://bintray.com/adriantodt/maven/dd4j/_latestVersion)
+
 Java API for DuckDuckGo Instant Answers API
+
+# Adding to your project
+
+Maven:
+```xml
+<dependency>
+  <groupId>pw.aru.api</groupId>
+  <artifactId>dd4j</artifactId>
+  <version>VERSION</version>
+  <type>pom</type>
+</dependency>
+```
+Gradle:
+```gradle
+compile 'pw.aru.api:dd4j:VERSION'
+```
+
+You can find the latest version [here](https://bintray.com/adriantodt/maven/dd4j)
+
+# Usage
+
+To get started, you need an instance of `DD4J`
+```java
+DD4J api = new DD4J.Builder().build();
+```
+
+To make a query, you need to use the `query(String)` method
+
+```java
+InstantAnswer answer = api.query("duckduckgo").execute();
+System.out.println("About DuckDuckGo: " + answer.getAbstractText());
+```
+
+
+Additional info can be found on the javadocs for the DD4J class and [on the official API docs](https://duckduckgo.com/api).
