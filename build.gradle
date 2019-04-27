@@ -2,71 +2,33 @@ plugins {
     id 'java'
     id 'maven'
     id 'maven-publish'
-    id 'com.jfrog.bintray' version '1.7.2'
+    id 'com.jfrog.bintray' version '1.8.4'
 }
 
-group = 'pw.aru.api'
-version = new Version(major: 1, minor: 0, revision: 1)
+group = 'pw.aru.libs'
+version = '1.0'
 
 sourceCompatibility = 1.8
-targetCompatibility = 1.8
 
 repositories {
-    mavenCentral()
+    jcenter()
     maven { url 'https://dl.bintray.com/natanbc/maven' }
 }
 
 dependencies {
-    //HTTP
     compile 'com.github.natanbc:reliqua:2.3.1'
-
-    //JSON parser
     compile 'org.json:json:20170516'
-
-    //Code safety
     compile 'com.google.code.findbugs:jsr305:3.0.2'
-
-    //Logging
     compile 'org.slf4j:slf4j-api:1.7.25'
 }
 
-import org.apache.tools.ant.filters.ReplaceTokens
-
-task sourcesForRelease(type: Copy) {
-    from 'src/main/java'
-    into 'build/filteredSrc'
-    filter(ReplaceTokens, tokens: [
-        VERSION_MAJOR   : version.getMajor(),
-        VERSION_MINOR   : version.getMinor(),
-        VERSION_REVISION: version.getRevision(),
-        COMMIT_HASH     : getCommitHash(),
-        COMMIT_MESSAGE  : getCommitMessage()
-    ])
-}
-
-compileJava {
-    source = sourcesForRelease.destinationDir
-    classpath = sourceSets.main.compileClasspath
-
-    options.encoding = 'UTF-8'
-
-    dependsOn sourcesForRelease
-}
-
-jar {
-    baseName = project.name
-    manifest {
-        attributes 'Implementation-Version': version
-    }
-}
-
 task sourcesJar(type: Jar, dependsOn: classes) {
-    classifier = 'sources'
-    from "${buildDir}/filteredSrc"
+    archiveClassifier = 'sources'
+    from sourceSets.main.allSource
 }
 
 task javadocJar(type: Jar, dependsOn: javadoc) {
-    classifier = 'javadoc'
+    archiveClassifier = 'javadoc'
     from javadoc.destinationDir
 }
 
@@ -102,8 +64,9 @@ bintray {
     pkg {
         repo = 'maven'
         name = project.name
+        userOrg = 'arudiscord'
         licenses = ['Apache-2.0']
-        vcsUrl = 'https://github.com/arubot/DD4J.git'
+        vcsUrl = 'https://github.com/arudiscord/DD4J.git'
         publish = true
         version {
             name = project.version
@@ -113,26 +76,5 @@ bintray {
 
 bintrayUpload {
     dependsOn build
-    dependsOn 'publishBintrayReleasePublicationToMavenLocal'
-}
-
-static def getCommitHash() {
-    def p = Runtime.getRuntime().exec("git rev-parse HEAD")
-    p.waitFor()
-    p.getIn().text.trim()
-}
-
-static def getCommitMessage() {
-    def p = Runtime.getRuntime().exec("git log -1 --pretty=%B")
-    p.waitFor()
-    p.getIn().text.trim()
-}
-
-class Version {
-    String major, minor, revision
-
-
-    String toString() {
-        "${major}.${minor}" + (revision == "0" ? "" : ".${revision}")
-    }
+    dependsOn publishToMavenLocal
 }

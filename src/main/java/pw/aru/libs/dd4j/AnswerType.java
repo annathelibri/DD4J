@@ -1,4 +1,4 @@
-package pw.aru.api.dd4j;
+package pw.aru.libs.dd4j;
 
 public enum AnswerType {
     //Type: response category, i.e. A (article), D (disambiguation), C (category), N (name), E (exclusive), or nothing.

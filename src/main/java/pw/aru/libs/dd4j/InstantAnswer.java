@@ -1,4 +1,4 @@
-package pw.aru.api.dd4j;
+package pw.aru.libs.dd4j;
 
 import org.json.JSONArray;
 import org.json.JSONException;

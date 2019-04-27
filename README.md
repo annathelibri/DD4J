@@ -1,27 +1,45 @@
 # DD4J
-[ ![Download](https://api.bintray.com/packages/adriantodt/maven/DD4J/images/download.svg) ](https://bintray.com/adriantodt/maven/DD4J/_latestVersion)
+Java API for DuckDuckGo Instant Answers API.
 
-Java API for DuckDuckGo Instant Answers API
+Licensed under the [Apache 2.0 License](https://github.com/arudiscord/DD4J/blob/master/LICENSE).
 
-# Adding to your project
+### Installation
 
-Maven:
-```xml
-<dependency>
-  <groupId>pw.aru.api</groupId>
-  <artifactId>DD4J</artifactId>
-  <version>VERSION</version>
-  <type>pom</type>
-</dependency>
-```
-Gradle:
+![Latest Version](https://api.bintray.com/packages/arudiscord/maven/DD4J/images/download.svg)
+
+Using in Gradle:
+
 ```gradle
-compile 'pw.aru.api:DD4J:VERSION'
+repositories {
+  jcenter()
+}
+
+dependencies {
+  compile 'pw.aru.libs:DD4J:LATEST' // replace LATEST with the version above
+}
 ```
 
-You can find the latest version [here](https://bintray.com/adriantodt/maven/DD4J)
+Using in Maven:
 
-# Usage
+```xml
+<repositories>
+  <repository>
+    <id>central</id>
+    <name>bintray</name>
+    <url>http://jcenter.bintray.com</url>
+  </repository>
+</repositories>
+
+<dependencies>
+  <dependency>
+    <groupId>pw.aru.libs</groupId>
+    <artifactId>DD4J</artifactId>
+    <version>LATEST</version> <!-- replace LATEST with the version above -->
+  </dependency>
+</dependencies>
+```
+
+### Usage
 
 To get started, you need an instance of `DD4J`
 ```java
@@ -35,5 +53,10 @@ InstantAnswer answer = api.query("duckduckgo").execute();
 System.out.println("About DuckDuckGo: " + answer.getAbstractText());
 ```
 
-
 Additional info can be found on the javadocs for the DD4J class and [on the official API docs](https://duckduckgo.com/api).
+
+### Support
+
+Support is given on [Aru's Discord Server](https://discord.gg/URPghxg)
+
+[![Aru's Discord Server](https://discordapp.com/api/guilds/403934661627215882/embed.png?style=banner2)](https://discord.gg/URPghxg)

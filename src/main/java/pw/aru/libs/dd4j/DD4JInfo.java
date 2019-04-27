@@ -1,4 +1,4 @@
-package pw.aru.api.dd4j;
+package pw.aru.libs.dd4j;
 
 @SuppressWarnings({"unused", "WeakerAccess"})
 public class DD4JInfo {
